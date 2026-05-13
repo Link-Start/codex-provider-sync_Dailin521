@@ -9,7 +9,7 @@
 [![Node](https://img.shields.io/badge/node-24%2B-brightgreen.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-[English](README_EN.md) | 中文
+中文 | [English](README_EN.md)
 
 </div>
 
