@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/Dailin521/codex-provider-sync/releases/latest
     about: 先确认你正在使用最新版本。
   - name: 阅读中文 README
-    url: https://github.com/Dailin521/codex-provider-sync/blob/main/README_ZH.md
+    url: https://github.com/Dailin521/codex-provider-sync/blob/main/README.md
     about: 查看 sync / switch / restore 的区别和工具能力边界。

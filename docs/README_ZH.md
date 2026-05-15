@@ -7,9 +7,9 @@
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://github.com/Dailin521/codex-provider-sync)
 [![Node](https://img.shields.io/badge/node-24%2B-brightgreen.svg)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE)
 
-中文 | [English](README_EN.md)
+中文 | [English](README_EN.md) | [中文镜像](../README.md)
 
 </div>
 
@@ -98,7 +98,7 @@ codex-provider prune-backups --keep 5
 - 如果活跃会话锁住 rollout 文件，工具会跳过该文件并继续处理其它历史会话。
 - 如果 EXE 双击无反应，先确认已解压，再查看 `%AppData%\codex-provider-sync\startup-error.log`，或在 PowerShell 里运行 `./CodexProviderSync.exe`。
 
-GUI 说明见 [README_GUI_ZH.md](README_GUI_ZH.md)。AI / Agent 说明见 [AGENTS.md](AGENTS.md)。
+GUI 说明见 [README_GUI_ZH.md](README_GUI_ZH.md)。AI / Agent 说明见 [AGENTS.md](../AGENTS.md)。
 
 ## 开发
 

@@ -5,9 +5,8 @@
   "type": "module",
   "files": [
     "README.md",
-    "README_EN.md",
-    "README_ZH.md",
     "AGENTS.md",
+    "docs",
     "src"
   ],
   "bin": {

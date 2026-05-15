@@ -7,10 +7,10 @@
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://github.com/Dailin521/codex-provider-sync)
 [![Node](https://img.shields.io/badge/node-24%2B-brightgreen.svg)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE)
 [![Community](https://img.shields.io/badge/community-LINUX%20DO-2ea043.svg)](https://linux.do/)
 
-English | [中文](README.md)
+English | [中文](../README.md) | [中文镜像](README_ZH.md)
 
 </div>
 
@@ -223,7 +223,7 @@ It also uses:
 
 ## For AI Agents
 
-For a fuller machine-oriented version, see [AGENTS.md](AGENTS.md).
+For a fuller machine-oriented version, see [AGENTS.md](../AGENTS.md).
 
 ## Development
 
