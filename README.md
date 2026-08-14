@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Codex 本地会话的诊断、修复、备份与迁移工具
+### 从安全恢复 Codex 历史，到跨设备会话连续性
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -16,11 +16,11 @@
 
 ## 项目定位
 
-`codex-provider-sync` 正在从单一的 Provider 元数据同步工具，演进为独立的 **Codex 本地会话数据诊断、修复、备份与迁移工具**。
+`codex-provider-sync` 正在从 Provider 元数据同步工具，演进为一个 **本地优先的 Codex 会话备份、跨设备同步与恢复工具**。
 
-当前版本首先解决最常见、已经验证的问题：识别 Codex 实际使用的本地存储，诊断 rollout、SQLite 和项目路径元数据，并在备份后修复 Provider 切换造成的历史会话不可见。后续能力将继续建立在同一套 CLI/Core 上，逐步覆盖存储布局迁移、Codex Home 迁移和可验证的备份迁移。
+当前 `0.x` 版本已经提供 Provider 切换后的历史可见性修复，以及写入前的托管恢复点和恢复命令。这些恢复点用于撤销本工具的元数据与 SQLite 修改，并不是完整聊天归档。完整本地备份、可移植会话包、同步文件夹和跨设备冲突处理属于后续路线图，尚未作为现成功能提供。
 
-本项目不与 CCSwitch 等 Provider 管理工具竞争。它们负责切换账号或供应商；本项目负责在任何切换方式之后，独立检查和修复 Codex 本地会话数据。完整范围与演进原则见[产品定位与演进方向](docs/PRODUCT_DIRECTION_ZH.md)。
+Provider 同步将保留为一项兼容性修复，而不是产品的全部边界。本项目不与 CCSwitch 等 Provider 管理工具竞争：它们负责切换账号或供应商；本项目从已经验证的历史可见性恢复出发，长期关注会话数据的完整备份、跨设备连续性和异常恢复。完整范围与演进原则见[产品定位与演进方向](docs/PRODUCT_DIRECTION_ZH.md)。
 
 ## 它解决什么
 
@@ -142,7 +142,7 @@ flowchart LR
 - Windows GUI 通过 Application 层调用 .NET Core；macOS GUI 当前直接调用 .NET Core。
 - Node 服务和 .NET Core 处理相同的配置、rollout、SQLite 和备份安全边界。
 
-这是当前实现，而不是最终目标。后续将以 CLI/Core 作为唯一业务实现，让 Windows UI 和 Web UI 通过版本化机器协议复用诊断、修复、备份与迁移能力。
+这是当前实现，而不是最终目标。后续将以 CLI/Core 作为唯一业务实现，让浏览器界面与轻量 Windows 桌面壳复用同一套 React UI，并通过版本化机器协议调用备份、同步、恢复和兼容性修复能力；Windows 安装包应自带所需运行时，不要求普通用户另装 Node.js。
 
 ## 安全边界
 

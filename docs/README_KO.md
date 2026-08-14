@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Codex 로컬 세션 진단·복구·백업·마이그레이션 도구
+### Codex 기록의 안전한 복구에서 기기 간 연속성으로
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -16,11 +16,11 @@
 
 ## 프로젝트 방향
 
-`codex-provider-sync`는 단일 Provider 메타데이터 동기화 도구에서 독립적인 **Codex 로컬 세션 데이터 진단·복구·백업·마이그레이션 도구**로 발전하고 있습니다.
+`codex-provider-sync`는 Provider 메타데이터 동기화 도구에서 **로컬 우선 Codex 세션 백업·기기 간 연속성·복구 도구**로 발전하고 있습니다.
 
-현재 버전은 가장 일반적이고 실제 환경에서 검증된 문제부터 해결합니다. Codex가 실제로 사용하는 로컬 저장소를 찾고 rollout, SQLite, 프로젝트 경로 메타데이터를 진단한 뒤, 먼저 백업을 만들고 Provider 전환으로 사라진 기록 표시를 복구합니다. 이후 기능은 동일한 CLI/Core를 기반으로 저장소 레이아웃, Codex Home, 검증 가능한 백업 마이그레이션까지 단계적으로 확장합니다.
+현재 `0.x` 버전은 Provider 전환 후 기록 표시 복구와 함께 쓰기 전 관리형 복구 지점 및 복원 명령을 제공합니다. 이 복구 지점은 이 도구가 변경한 메타데이터와 SQLite를 되돌리기 위한 것이며 완전한 채팅 아카이브가 아닙니다. 완전한 로컬 백업, 이식 가능한 세션 번들, 동기화 폴더, 기기 간 충돌 처리는 향후 로드맵이며 현재 제공되는 기능이 아닙니다.
 
-이 프로젝트는 CCSwitch 같은 Provider 관리 도구와 경쟁하지 않습니다. 해당 도구는 계정이나 Provider 전환을 담당하고, 이 프로젝트는 전환 방식과 관계없이 Codex 로컬 세션 데이터를 독립적으로 검사하고 복구합니다. 전체 범위와 원칙은 [제품 방향 문서(중국어)](PRODUCT_DIRECTION_ZH.md)를 참고하세요.
+Provider 동기화는 호환성 복구 기능으로 유지되지만 제품 전체의 경계는 아닙니다. 이 프로젝트는 CCSwitch 같은 Provider 관리 도구와 경쟁하지 않습니다. 이러한 도구가 계정이나 Provider를 전환한다면, 이 프로젝트는 검증된 기록 표시 복구에서 출발하여 완전한 세션 백업, 기기 간 연속성, 장애 복구에 집중합니다. 전체 범위와 원칙은 [제품 방향 문서(중국어)](PRODUCT_DIRECTION_ZH.md)를 참고하세요.
 
 ## 해결하는 문제
 
@@ -144,7 +144,7 @@ flowchart LR
 - Windows GUI는 Application 계층을 통해 .NET Core를 호출하고, macOS GUI는 현재 .NET Core를 직접 호출합니다.
 - Node 서비스와 .NET Core는 동일한 설정, rollout, SQLite, 백업 안전 범위를 처리합니다.
 
-이는 현재 구현이며 최종 목표는 아닙니다. 앞으로 CLI/Core를 유일한 비즈니스 구현으로 삼고, Windows UI와 Web UI가 버전이 지정된 기계용 프로토콜을 통해 진단·복구·백업·마이그레이션 기능을 공유하도록 전환합니다.
+이는 현재 구현이며 최종 목표는 아닙니다. 앞으로 CLI/Core를 유일한 비즈니스 구현으로 삼고, 브라우저 UI와 가벼운 Windows 데스크톱 셸이 하나의 React UI를 재사용하면서 버전이 지정된 기계용 프로토콜로 백업, 동기화, 복구, 호환성 복구 기능을 호출하도록 전환합니다. Windows 패키지는 필요한 런타임을 포함하여 일반 사용자가 Node.js를 별도로 설치하지 않아도 되도록 합니다.
 
 ## 안전 범위
 

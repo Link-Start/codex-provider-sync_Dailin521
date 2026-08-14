@@ -4,7 +4,7 @@
 
 ## 1. 项目定位
 
-`codex-provider-sync` 的长期定位是 Codex 本地会话数据的诊断、修复、备份与迁移工具。当前 `0.x` 实现以会话元数据一致性修复为核心，并为后续存储布局和会话迁移建立可靠的数据发现、备份、事务与恢复基础。演进范围见[产品定位与演进方向](PRODUCT_DIRECTION_ZH.md)。
+`codex-provider-sync` 的长期定位是本地优先的 Codex 会话备份、跨设备同步与恢复工具。当前 `0.x` 实现仍以会话元数据一致性修复为核心，并为后续可移植会话包、受控导入和同步文件夹建立可靠的数据发现、备份、事务与恢复基础。演进范围见[产品定位与演进方向](PRODUCT_DIRECTION_ZH.md)。
 
 它不是用于恢复已经被删除的聊天内容，也不负责登录、认证或切换账号。尚未实现的跨设备或存储迁移不会在本文中作为当前能力描述。
 
@@ -402,7 +402,7 @@ state_5.sqlite-wal
 state_5.sqlite
 ```
 
-因此备份时工具会同时复制主数据库、`-wal` 和 `-shm` 文件（如果存在），不能只复制主数据库。
+备份时，工具通过 SQLite online backup API 生成一致、可独立恢复的主数据库快照。已提交到 WAL 的状态会被纳入快照，但工具不会单独复制正在使用的 `-wal` 或 `-shm` 文件。
 
 相关实现位于 [`src/sqlite-state.js`](../src/sqlite-state.js) 和 [`src/sqlite.js`](../src/sqlite.js)。
 
@@ -458,9 +458,7 @@ D:\GitHubProject\demo
 ├── .codex-global-state.json.bak
 └── db/
     └── sqlite-home/
-        ├── state_5.sqlite
-        ├── state_5.sqlite-wal
-        └── state_5.sqlite-shm
+        └── state_5.sqlite
 ```
 
 ### 9.1 `metadata.json`
@@ -748,4 +746,4 @@ Desktop workspace/project metadata
   → 失败时补偿恢复
 ```
 
-因此，当前实现是一套针对 Codex 本地会话可见性问题、具备诊断、备份和回滚能力的元数据修复机制；它也是后续会话备份验证与迁移能力的数据安全基础。
+因此，当前实现是一套针对 Codex 本地会话可见性问题、具备诊断、备份和回滚能力的元数据修复机制；它也是后续构建可验证会话包、目标端索引重建和跨设备恢复能力的数据安全基础。

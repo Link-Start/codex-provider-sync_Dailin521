@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Diagnose, repair, back up, and migrate local Codex sessions
+### From safe Codex history recovery to cross-device continuity
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -16,11 +16,11 @@
 
 ## Positioning
 
-`codex-provider-sync` is evolving from a single-purpose provider metadata synchronizer into an independent **diagnosis, repair, backup, and migration tool for local Codex session data**.
+`codex-provider-sync` is evolving from a provider metadata synchronizer into a **local-first backup, cross-device continuity, and recovery tool for Codex sessions**.
 
-The current release starts with the most common, field-tested problem: discovering the storage Codex actually uses, diagnosing rollout, SQLite, and project-path metadata, then repairing history visibility after a provider change with a backup created first. Future capabilities will build on the same CLI/Core and progressively cover storage-layout migration, Codex Home migration, and verifiable backup migration.
+The current `0.x` release already repairs history visibility after provider changes and provides managed recovery points before writes plus a restore command. These recovery points undo this tool's metadata and SQLite changes; they are not complete chat archives. Complete local backups, portable session bundles, sync folders, and cross-device conflict handling are roadmap items, not shipped capabilities.
 
-This project does not compete with provider managers such as CCSwitch. They switch accounts or providers; this project independently inspects and repairs local Codex session data after any switching method. See the [product direction (Chinese)](PRODUCT_DIRECTION_ZH.md) for the complete scope and principles.
+Provider synchronization remains a compatibility repair, not the whole product boundary. This project does not compete with provider managers such as CCSwitch: they switch accounts or providers, while this project starts from proven history-visibility recovery and will focus on complete session backups, cross-device continuity, and recovery from failures. See the [product direction (Chinese)](PRODUCT_DIRECTION_ZH.md) for the complete scope and principles.
 
 ## What it solves
 
@@ -144,7 +144,7 @@ flowchart LR
 - The Windows GUI calls .NET Core through the Application layer; the macOS GUI currently calls .NET Core directly.
 - The Node service and .NET Core enforce the same configuration, rollout, SQLite, and backup safety boundaries.
 
-This describes the current implementation, not the final target. The CLI/Core will become the single business implementation, while Windows UI and Web UI reuse diagnosis, repair, backup, and migration capabilities through a versioned machine protocol.
+This describes the current implementation, not the final target. The CLI/Core will become the single business implementation; the browser UI and a lightweight Windows desktop shell will reuse one React UI and call backup, sync, recovery, and compatibility-repair capabilities through a versioned machine protocol. The Windows package should bundle its runtime so ordinary users do not need to install Node.js.
 
 ## Safety boundaries
 

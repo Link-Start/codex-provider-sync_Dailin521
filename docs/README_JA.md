@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Codex ローカルセッションの診断・修復・バックアップ・移行ツール
+### Codex 履歴の安全な復元から、デバイス間の継続利用へ
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -16,11 +16,11 @@
 
 ## 位置づけ
 
-`codex-provider-sync` は、単一用途の Provider メタデータ同期ツールから、独立した **Codex ローカルセッションデータの診断・修復・バックアップ・移行ツール**へと発展しています。
+`codex-provider-sync` は、Provider メタデータ同期ツールから、**ローカルファーストの Codex セッションバックアップ、デバイス間連携、復元ツール**へと発展しています。
 
-現行版では、まず最も一般的で実機検証済みの問題に対応します。Codex が実際に使用しているローカルストレージを特定し、rollout、SQLite、プロジェクトパスのメタデータを診断した上で、バックアップを作成してから Provider 切り替え後の履歴表示を修復します。今後は同じ CLI/Core を基盤として、ストレージレイアウト、Codex Home、検証可能なバックアップの移行へ段階的に拡張します。
+現行の `0.x` 版では、Provider 切り替え後の履歴表示の修復に加え、書き込み前の管理対象リカバリーポイントと復元コマンドを提供しています。このリカバリーポイントは本ツールによるメタデータと SQLite の変更を取り消すためのもので、完全なチャットアーカイブではありません。完全なローカルバックアップ、ポータブルなセッションパッケージ、同期フォルダー、デバイス間の競合処理は今後のロードマップであり、現時点の提供機能ではありません。
 
-本プロジェクトは CCSwitch などの Provider 管理ツールと競合するものではありません。それらがアカウントや Provider の切り替えを担当し、本プロジェクトは切り替え方法に依存せず Codex のローカルセッションデータを検査・修復します。範囲と方針については[製品方針（中国語）](PRODUCT_DIRECTION_ZH.md)を参照してください。
+Provider 同期は互換性修復の一機能として残りますが、製品全体の境界ではありません。本プロジェクトは CCSwitch などの Provider 管理ツールと競合しません。それらがアカウントや Provider を切り替える一方、本プロジェクトは実証済みの履歴表示の復元を出発点として、完全なセッションバックアップ、デバイス間の継続利用、障害からの復元に重点を置きます。範囲と方針については[製品方針（中国語）](PRODUCT_DIRECTION_ZH.md)を参照してください。
 
 ## 解決すること
 
@@ -144,7 +144,7 @@ flowchart LR
 - Windows GUI は Application 層を通じて .NET Core を呼び出し、macOS GUI は現在 .NET Core を直接呼び出します。
 - Node サービスと .NET Core は同じ設定、rollout、SQLite、バックアップの安全境界を扱います。
 
-これは現在の実装であり、最終的な目標ではありません。今後は CLI/Core を唯一のビジネス実装とし、Windows UI と Web UI がバージョン化された機械向けプロトコルを通じて診断・修復・バックアップ・移行機能を共有する構成へ移行します。
+これは現在の実装であり、最終的な目標ではありません。今後は CLI/Core を唯一のビジネス実装とし、ブラウザー UI と軽量な Windows デスクトップシェルが同じ React UI を再利用して、バージョン化された機械向けプロトコルからバックアップ、同期、復元、互換性修復を呼び出す構成へ移行します。Windows パッケージには必要なランタイムを同梱し、一般ユーザーが Node.js を別途インストールしなくても使える形を目指します。
 
 ## 安全上の境界
 
