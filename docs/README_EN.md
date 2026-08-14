@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Make Codex history visible again after switching providers
+### Diagnose, repair, back up, and migrate local Codex sessions
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -13,6 +13,14 @@
 [中文](../README.md) · **English** · [日本語](README_JA.md) · [한국어](README_KO.md)
 
 </div>
+
+## Positioning
+
+`codex-provider-sync` is evolving from a single-purpose provider metadata synchronizer into an independent **diagnosis, repair, backup, and migration tool for local Codex session data**.
+
+The current release starts with the most common, field-tested problem: discovering the storage Codex actually uses, diagnosing rollout, SQLite, and project-path metadata, then repairing history visibility after a provider change with a backup created first. Future capabilities will build on the same CLI/Core and progressively cover storage-layout migration, Codex Home migration, and verifiable backup migration.
+
+This project does not compete with provider managers such as CCSwitch. They switch accounts or providers; this project independently inspects and repairs local Codex session data after any switching method. See the [product direction (Chinese)](PRODUCT_DIRECTION_ZH.md) for the complete scope and principles.
 
 ## What it solves
 
@@ -136,6 +144,8 @@ flowchart LR
 - The Windows GUI calls .NET Core through the Application layer; the macOS GUI currently calls .NET Core directly.
 - The Node service and .NET Core enforce the same configuration, rollout, SQLite, and backup safety boundaries.
 
+This describes the current implementation, not the final target. The CLI/Core will become the single business implementation, while Windows UI and Web UI reuse diagnosis, repair, backup, and migration capabilities through a versioned machine protocol.
+
 ## Safety boundaries
 
 - Before every `sync` or `switch`, a backup is created at `<Codex Home>/backups_state/provider-sync/<timestamp>`; with the default Codex Home, this is `~/.codex/backups_state/provider-sync/<timestamp>`.
@@ -147,6 +157,7 @@ flowchart LR
 
 ## Documentation
 
+- [Product direction (Chinese)](PRODUCT_DIRECTION_ZH.md)
 - [AI / Agent Guide](../AGENTS.md)
 - [Windows GUI guide (Chinese)](README_GUI_ZH.md)
 - [Web UI guide (Chinese)](README_WEB_UI_ZH.md)

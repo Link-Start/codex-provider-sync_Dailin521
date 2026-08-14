@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Provider 切り替え後も Codex の過去セッションを再表示する
+### Codex ローカルセッションの診断・修復・バックアップ・移行ツール
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -13,6 +13,14 @@
 [中文](../README.md) · [English](README_EN.md) · **日本語** · [한국어](README_KO.md)
 
 </div>
+
+## 位置づけ
+
+`codex-provider-sync` は、単一用途の Provider メタデータ同期ツールから、独立した **Codex ローカルセッションデータの診断・修復・バックアップ・移行ツール**へと発展しています。
+
+現行版では、まず最も一般的で実機検証済みの問題に対応します。Codex が実際に使用しているローカルストレージを特定し、rollout、SQLite、プロジェクトパスのメタデータを診断した上で、バックアップを作成してから Provider 切り替え後の履歴表示を修復します。今後は同じ CLI/Core を基盤として、ストレージレイアウト、Codex Home、検証可能なバックアップの移行へ段階的に拡張します。
+
+本プロジェクトは CCSwitch などの Provider 管理ツールと競合するものではありません。それらがアカウントや Provider の切り替えを担当し、本プロジェクトは切り替え方法に依存せず Codex のローカルセッションデータを検査・修復します。範囲と方針については[製品方針（中国語）](PRODUCT_DIRECTION_ZH.md)を参照してください。
 
 ## 解決すること
 
@@ -136,6 +144,8 @@ flowchart LR
 - Windows GUI は Application 層を通じて .NET Core を呼び出し、macOS GUI は現在 .NET Core を直接呼び出します。
 - Node サービスと .NET Core は同じ設定、rollout、SQLite、バックアップの安全境界を扱います。
 
+これは現在の実装であり、最終的な目標ではありません。今後は CLI/Core を唯一のビジネス実装とし、Windows UI と Web UI がバージョン化された機械向けプロトコルを通じて診断・修復・バックアップ・移行機能を共有する構成へ移行します。
+
 ## 安全上の境界
 
 - `sync` / `switch` の前に、毎回 `<Codex Home>/backups_state/provider-sync/<timestamp>` へバックアップします。デフォルトの Codex Home では `~/.codex/backups_state/provider-sync/<timestamp>` です。
@@ -147,6 +157,7 @@ flowchart LR
 
 ## ドキュメント
 
+- [製品方針（中国語）](PRODUCT_DIRECTION_ZH.md)
 - [AI / Agent ガイド](../AGENTS.md)
 - [Windows GUI（中国語）](README_GUI_ZH.md)
 - [Web UI（中国語）](README_WEB_UI_ZH.md)

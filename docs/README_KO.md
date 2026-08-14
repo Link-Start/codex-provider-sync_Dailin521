@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### Provider 전환 후 Codex의 이전 세션을 다시 표시합니다
+### Codex 로컬 세션 진단·복구·백업·마이그레이션 도구
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -13,6 +13,14 @@
 [中文](../README.md) · [English](README_EN.md) · [日本語](README_JA.md) · **한국어**
 
 </div>
+
+## 프로젝트 방향
+
+`codex-provider-sync`는 단일 Provider 메타데이터 동기화 도구에서 독립적인 **Codex 로컬 세션 데이터 진단·복구·백업·마이그레이션 도구**로 발전하고 있습니다.
+
+현재 버전은 가장 일반적이고 실제 환경에서 검증된 문제부터 해결합니다. Codex가 실제로 사용하는 로컬 저장소를 찾고 rollout, SQLite, 프로젝트 경로 메타데이터를 진단한 뒤, 먼저 백업을 만들고 Provider 전환으로 사라진 기록 표시를 복구합니다. 이후 기능은 동일한 CLI/Core를 기반으로 저장소 레이아웃, Codex Home, 검증 가능한 백업 마이그레이션까지 단계적으로 확장합니다.
+
+이 프로젝트는 CCSwitch 같은 Provider 관리 도구와 경쟁하지 않습니다. 해당 도구는 계정이나 Provider 전환을 담당하고, 이 프로젝트는 전환 방식과 관계없이 Codex 로컬 세션 데이터를 독립적으로 검사하고 복구합니다. 전체 범위와 원칙은 [제품 방향 문서(중국어)](PRODUCT_DIRECTION_ZH.md)를 참고하세요.
 
 ## 해결하는 문제
 
@@ -136,6 +144,8 @@ flowchart LR
 - Windows GUI는 Application 계층을 통해 .NET Core를 호출하고, macOS GUI는 현재 .NET Core를 직접 호출합니다.
 - Node 서비스와 .NET Core는 동일한 설정, rollout, SQLite, 백업 안전 범위를 처리합니다.
 
+이는 현재 구현이며 최종 목표는 아닙니다. 앞으로 CLI/Core를 유일한 비즈니스 구현으로 삼고, Windows UI와 Web UI가 버전이 지정된 기계용 프로토콜을 통해 진단·복구·백업·마이그레이션 기능을 공유하도록 전환합니다.
+
 ## 안전 범위
 
 - 매 `sync` / `switch` 전 `<Codex Home>/backups_state/provider-sync/<timestamp>`에 백업합니다. 기본 Codex Home에서는 `~/.codex/backups_state/provider-sync/<timestamp>`입니다.
@@ -147,6 +157,7 @@ flowchart LR
 
 ## 문서
 
+- [제품 방향 문서 (중국어)](PRODUCT_DIRECTION_ZH.md)
 - [AI / Agent 가이드](../AGENTS.md)
 - [Windows GUI (중국어)](README_GUI_ZH.md)
 - [Web UI (중국어)](README_WEB_UI_ZH.md)

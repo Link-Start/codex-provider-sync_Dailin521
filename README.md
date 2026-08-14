@@ -2,7 +2,7 @@
 
 # codex-provider-sync
 
-### 切换 Provider 后，让 Codex 历史会话重新可见
+### Codex 本地会话的诊断、修复、备份与迁移工具
 
 [![CI](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml/badge.svg)](https://github.com/Dailin521/codex-provider-sync/actions/workflows/ci.yml)
 [![CLI / Web](https://img.shields.io/npm/v/%40dailin521%2Fcodex-provider-sync?label=CLI%20%2F%20Web)](https://www.npmjs.com/package/@dailin521/codex-provider-sync)
@@ -13,6 +13,14 @@
 **中文** · [English](docs/README_EN.md) · [日本語](docs/README_JA.md) · [한국어](docs/README_KO.md)
 
 </div>
+
+## 项目定位
+
+`codex-provider-sync` 正在从单一的 Provider 元数据同步工具，演进为独立的 **Codex 本地会话数据诊断、修复、备份与迁移工具**。
+
+当前版本首先解决最常见、已经验证的问题：识别 Codex 实际使用的本地存储，诊断 rollout、SQLite 和项目路径元数据，并在备份后修复 Provider 切换造成的历史会话不可见。后续能力将继续建立在同一套 CLI/Core 上，逐步覆盖存储布局迁移、Codex Home 迁移和可验证的备份迁移。
+
+本项目不与 CCSwitch 等 Provider 管理工具竞争。它们负责切换账号或供应商；本项目负责在任何切换方式之后，独立检查和修复 Codex 本地会话数据。完整范围与演进原则见[产品定位与演进方向](docs/PRODUCT_DIRECTION_ZH.md)。
 
 ## 它解决什么
 
@@ -134,6 +142,8 @@ flowchart LR
 - Windows GUI 通过 Application 层调用 .NET Core；macOS GUI 当前直接调用 .NET Core。
 - Node 服务和 .NET Core 处理相同的配置、rollout、SQLite 和备份安全边界。
 
+这是当前实现，而不是最终目标。后续将以 CLI/Core 作为唯一业务实现，让 Windows UI 和 Web UI 通过版本化机器协议复用诊断、修复、备份与迁移能力。
+
 ## 安全边界
 
 - 每次 `sync` / `switch` 前备份到 `<Codex Home>/backups_state/provider-sync/<timestamp>`；使用默认 Codex Home 时即为 `~/.codex/backups_state/provider-sync/<timestamp>`。
@@ -145,6 +155,7 @@ flowchart LR
 
 ## 文档
 
+- [产品定位与演进方向](docs/PRODUCT_DIRECTION_ZH.md)
 - [AI / Agent 操作指南](AGENTS.md)
 - [Windows GUI](docs/README_GUI_ZH.md)
 - [Web UI](docs/README_WEB_UI_ZH.md)

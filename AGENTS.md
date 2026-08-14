@@ -4,7 +4,9 @@ This file is for AI assistants and automation working in this repository. User-f
 
 ## Goal
 
-Restore Codex session visibility after `model_provider` changes by keeping rollout metadata and the resolved SQLite thread index aligned. Do not treat this as an authentication or account-management tool.
+Build an independent tool for diagnosing, repairing, backing up, and migrating local Codex session data. The current implemented focus is restoring session visibility after `model_provider` changes by keeping rollout metadata, project paths, and the resolved SQLite thread index aligned.
+
+Provider synchronization is one repair capability, not the long-term product boundary. Do not treat the project as an authentication, account-management, or provider-routing tool, and do not describe planned storage or cross-device migration as already implemented. Product scope and sequencing are recorded in [docs/PRODUCT_DIRECTION_ZH.md](docs/PRODUCT_DIRECTION_ZH.md).
 
 ## Choose the interface
 
@@ -65,9 +67,10 @@ On Windows, `\\wsl.localhost\...` and `\\wsl$\...` SQLite Homes are diagnostic-o
 ## Engineering direction
 
 - Node CLI and Web UI share the service layer in `src/`; do not duplicate sync logic in the browser.
-- .NET Core remains authoritative for config, rollout, SQLite, backup, restore, and storage safety.
-- Windows GUI routes UI-independent work through the Application/controller layer; WinForms owns presentation and native platform interaction.
-- macOS currently calls Core directly. Do not document an Application-layer dependency that does not exist.
+- Make the CLI/Core the single long-term source of truth for discovery, diagnosis, planning, repair, backup, restore, and migration.
+- Expose a versioned machine-readable CLI protocol before moving desktop behavior onto it. Keep human CLI output separate from the machine contract.
+- Evolve the Windows GUI into a lightweight client over that contract; presentation, native integration, and process lifecycle belong in the desktop layer, not duplicated data logic.
+- Today the Windows GUI still routes through the .NET Application/Core layers and macOS calls .NET Core directly. Preserve their safety behavior until each client is migrated; do not document the target architecture as if it were already complete.
 - Add focused tests for behavior changes. Prefer controller tests over new reflection-based WinForms business tests.
 
 ## Reporting
